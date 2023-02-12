@@ -1,0 +1,30 @@
+// Variables
+$font-primary: "Georama", sans-serif;
+$color-primary: #fa6e16;
+$background-primary: #333;
+$white: #fff;
+
+// Global styling
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  font-family: $font-primary;
+
+  &::-moz-selection {
+    background: $color-primary;
+  }
+
+  &::selection {
+    background: $color-primary;
+  }
+}
+
+body {
+  background: $background-primary;
+  overflow: hidden;
+}
