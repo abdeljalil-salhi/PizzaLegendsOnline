@@ -8,7 +8,24 @@ export const Main: FC<MainProps> = () => {
     const overworld = new Overworld({
       element: document.querySelector(".game__container") as HTMLDivElement,
     });
-	overworld.init();
+    overworld.init();
+
+    document.addEventListener("keydown", (event) => {
+      switch (event.key) {
+        case "ArrowUp":
+          overworld.moveHeroUp();
+          break;
+        case "ArrowDown":
+          overworld.moveHeroDown();
+          break;
+        case "ArrowLeft":
+          overworld.moveHeroLeft();
+          break;
+        case "ArrowRight":
+          overworld.moveHeroRight();
+          break;
+      }
+    });
   }, []);
 
   return (
