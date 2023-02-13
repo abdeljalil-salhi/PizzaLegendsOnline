@@ -10,7 +10,7 @@ export const Main: FC<MainProps> = () => {
     });
     overworld.init();
 
-    document.addEventListener("keydown", (event) => {
+    document.addEventListener("keydown", (event: KeyboardEvent) => {
       switch (event.key) {
         case "ArrowUp":
           overworld.moveHeroUp();
