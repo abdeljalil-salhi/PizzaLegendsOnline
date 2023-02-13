@@ -1,13 +1,12 @@
-interface OverworldConfig {
-  element: HTMLDivElement;
-}
+import { GameObject } from "./GameObject";
+import { OverworldConfig } from "./types/Overworld";
 
 export class Overworld {
-  element: HTMLDivElement;
-  canvas: HTMLCanvasElement;
-  ctx: CanvasRenderingContext2D;
-  x: number;
-  y: number;
+  private element: HTMLDivElement;
+  private canvas: HTMLCanvasElement;
+  private ctx: CanvasRenderingContext2D;
+  private x: number;
+  private y: number;
 
   constructor(config: OverworldConfig) {
     this.element = config.element;
@@ -26,37 +25,18 @@ export class Overworld {
     };
     image.src = "assets/maps/DemoLower.png";
 
-    const shadow: HTMLImageElement = new Image();
-    shadow.onload = () => {
-      this.ctx.drawImage(
-        shadow,
-        0,
-        0,
-        32,
-        32,
-        this.x * 16 - 8,
-        this.y * 16 - 18,
-        32,
-        32
-      );
-    };
-    shadow.src = "assets/characters/shadow.png";
+    const hero: GameObject = new GameObject({
+      x: 5,
+      y: 6,
+    });
+    const npc1: GameObject = new GameObject({
+      x: 7,
+      y: 9,
+      src: "assets/characters/people/npc1.png",
+    });
 
-    const hero: HTMLImageElement = new Image();
-    hero.onload = () => {
-      this.ctx.drawImage(
-        hero,
-        0,
-        0,
-        32,
-        32,
-        this.x * 16 - 8,
-        this.y * 16 - 18,
-        32,
-        32
-      );
-    };
-    hero.src = "assets/characters/people/hero.png";
+    hero.sprite.draw(this.ctx);
+    npc1.sprite.draw(this.ctx);
   }
 
   moveHero(x: number, y: number) {
