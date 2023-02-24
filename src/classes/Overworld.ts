@@ -1,12 +1,11 @@
-import { GameObject } from "./GameObject";
-import { OverworldConfig } from "./types/Overworld";
+import { OverworldMap, OverworldMaps } from "./OverworldMap";
+import { OverworldConfig } from "./types/Overworld.types";
 
 export class Overworld {
   private element: HTMLDivElement;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
-  private x: number;
-  private y: number;
+  private map: OverworldMap;
 
   constructor(config: OverworldConfig) {
     this.element = config.element;
@@ -14,50 +13,28 @@ export class Overworld {
       ".game__canvas"
     ) as HTMLCanvasElement;
     this.ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
-    this.x = 5;
-    this.y = 6;
+    this.map = null as unknown as OverworldMap;
   }
 
   init() {
-    const image: HTMLImageElement = new Image();
-    image.onload = () => {
-      this.ctx.drawImage(image, 0, 0);
+    this.map = new OverworldMap(OverworldMaps.Kitchen);
+    this.gameLoop();
+  }
+
+  gameLoop() {
+    const step = () => {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+      this.map.drawBackground(this.ctx);
+      Object.values(this.map.gameObjects).forEach((gameObject) => {
+        gameObject.sprite.draw(this.ctx);
+      });
+      this.map.drawForeground(this.ctx);
+
+      requestAnimationFrame(() => {
+        step();
+      });
     };
-    image.src = "assets/maps/DemoLower.png";
-
-    const hero: GameObject = new GameObject({
-      x: 5,
-      y: 6,
-    });
-    const npc1: GameObject = new GameObject({
-      x: 7,
-      y: 9,
-      src: "assets/characters/people/npc1.png",
-    });
-
-    hero.sprite.draw(this.ctx);
-    npc1.sprite.draw(this.ctx);
-  }
-
-  moveHero(x: number, y: number) {
-    this.x = x;
-    this.y = y;
-    this.init();
-  }
-
-  moveHeroUp() {
-    this.moveHero(this.x, this.y - 1);
-  }
-
-  moveHeroDown() {
-    this.moveHero(this.x, this.y + 1);
-  }
-
-  moveHeroLeft() {
-    this.moveHero(this.x - 1, this.y);
-  }
-
-  moveHeroRight() {
-    this.moveHero(this.x + 1, this.y);
+    step();
   }
 }

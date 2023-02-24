@@ -1,5 +1,5 @@
 import { Sprite } from "./Sprite";
-import { GameObjectConfig } from "./types/GameObject";
+import { GameObjectConfig } from "./types/GameObject.types";
 
 export class GameObject {
   public x: number;
@@ -7,10 +7,6 @@ export class GameObject {
   public sprite: Sprite;
 
   constructor(config: GameObjectConfig) {
-    /*
-     * The x and y properties are numbers that contain the position of the
-     * game object on the map.
-     */
     this.x = config.x || 0;
     this.y = config.y || 0;
     this.sprite = new Sprite({

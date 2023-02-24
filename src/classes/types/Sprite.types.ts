@@ -1,7 +1,7 @@
 import { GameObject } from "../GameObject";
 
 export interface IAnimations {
-  idleDown: number[][];
+  idleDown?: number[][];
 }
 
 export interface SpriteConfig {
