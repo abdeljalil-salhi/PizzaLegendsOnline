@@ -40,9 +40,9 @@ export class Sprite {
     this.gameObject = config.gameObject;
   }
 
-  public draw(ctx: CanvasRenderingContext2D) {
-    const x: number = this.gameObject.x * 16 - 8;
-    const y: number = this.gameObject.y * 16 - 18;
+  public draw(ctx: CanvasRenderingContext2D): void {
+    const x: number = this.gameObject.x - 8;
+    const y: number = this.gameObject.y - 18;
 
     this.isShadowLoaded && ctx.drawImage(this.shadow, x, y);
     this.isLoaded && ctx.drawImage(this.image, 0, 0, 32, 32, x, y, 32, 32);
