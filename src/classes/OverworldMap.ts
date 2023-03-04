@@ -4,8 +4,6 @@ import {
   DEMO_UPPER,
   KITCHEN_LOWER,
   KITCHEN_UPPER,
-  NPC1,
-  NPC2,
 } from "./constants/src.constants";
 import { GameObject } from "./GameObject";
 import { Person } from "./Person";
@@ -43,11 +41,11 @@ export const OverworldMaps = {
         x: withGrid(5),
         y: withGrid(6),
       }),
-      npc1: new Person({
-        x: withGrid(6),
-        y: withGrid(6),
-        src: NPC1,
-      }),
+      //   npc1: new Person({
+      //     x: withGrid(6),
+      //     y: withGrid(6),
+      //     src: NPC1,
+      //   }),
     },
     backgroundSrc: DEMO_LOWER,
     foregroundSrc: DEMO_UPPER,
@@ -59,16 +57,16 @@ export const OverworldMaps = {
         x: withGrid(3),
         y: withGrid(5),
       }),
-      npc1: new Person({
-        x: withGrid(4),
-        y: withGrid(5),
-        src: NPC1,
-      }),
-      npc2: new Person({
-        x: withGrid(10),
-        y: withGrid(8),
-        src: NPC2,
-      }),
+      //   npc1: new Person({
+      //     x: withGrid(4),
+      //     y: withGrid(5),
+      //     src: NPC1,
+      //   }),
+      //   npc2: new Person({
+      //     x: withGrid(10),
+      //     y: withGrid(8),
+      //     src: NPC2,
+      //   }),
     },
     backgroundSrc: KITCHEN_LOWER,
     foregroundSrc: KITCHEN_UPPER,

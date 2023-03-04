@@ -1,3 +1,4 @@
+import { FPS } from "../constants";
 import { IDLE_DOWN } from "./constants/macro.constants";
 import { SHADOW } from "./constants/src.constants";
 import { GameObject } from "./GameObject";
@@ -6,9 +7,11 @@ import { IAnimations, SpriteConfig } from "./types/Sprite.types";
 export class Sprite {
   public image: HTMLImageElement;
   public shadow: HTMLImageElement;
+  public animationFrameProgress: number;
   private animations: IAnimations;
   private currentAnimation: string;
   private currentAnimationFrame: number;
+  private animationFrameLimit: number;
   private isLoaded: boolean;
   private isShadowLoaded: boolean;
   private useShadow: boolean;
@@ -31,13 +34,26 @@ export class Sprite {
     };
 
     this.animations = config.animations || {
-      idleDown: [[0, 0]],
+      "idle-down": [[0, 0]],
+      "walk-down": [
+        [1, 0],
+        [0, 0],
+        [3, 0],
+        [0, 0],
+      ],
     };
 
     this.currentAnimation = config.currentAnimation || IDLE_DOWN;
     this.currentAnimationFrame = 0;
 
+    this.animationFrameLimit = config.animationFrameLimit || FPS;
+    this.animationFrameProgress = this.animationFrameLimit;
+
     this.gameObject = config.gameObject;
+  }
+
+  get frame(): number[] {
+    return this.animations[this.currentAnimation][this.currentAnimationFrame];
   }
 
   public draw(ctx: CanvasRenderingContext2D): void {

@@ -1,1 +1,1 @@
-export const IDLE_DOWN = "idleDown";
+export const IDLE_DOWN = "idle-down";
